@@ -81,7 +81,7 @@ echo 'actionsfile gfwlist.action' | sudo tee -a /etc/privoxy/config
 sudo systemctl restart privoxy
 ```
 
-执行上述命令以后，privoxy会监听`127.0.0.1:8118`端口做http代理，如果还需要给内网的其他机器使用，修改`/etc/privoxy/config`文件，监听`0.0.0.0:8118`端口，用`systemclt restart privoxy`重启即可。如果发现需要走代理的网站没走代理，编辑`/etc/privoxy/gfwlist.action`文件，按语法添加规则，同样是重启后生效。
+执行上述命令以后，privoxy会监听`127.0.0.1:8118`端口做http代理，如果还需要给内网的其他机器使用，修改`/etc/privoxy/config`文件，监听`0.0.0.0:8118`端口，用`systemclt restart privoxy`重启即可。如果发现需要走代理的网站没走代理，编辑`/etc/privoxy/gfwlist.action`文件，按语法添加规则，~~同样是重启后生效~~无需重启就可生效。
 
 ### 验证
 
