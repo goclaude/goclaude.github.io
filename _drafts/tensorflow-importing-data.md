@@ -15,5 +15,20 @@ tags:
 
 `tf.data`API有下面两种抽象：
 
-1. `tf.data.Dataset`：代表一个元素序列输入框
+1. `tf.data.Dataset`：代表一个元素序列，每个元素包含一个或多个`Tensor`对象。对于图片数据来说，可以是一个具有图片数据和标签数据的`Tensor`对。有两种主要的创建`dataset`的方式，一种是直接通过一个或多个`Tensor`对象来创建，例如`Dataset.from_tensor_slices()`；一种是从一个或多个`Dataset`来创建，例如`Dataset.batch()`。
+2. `tf.data.Iterator`：`Dataset`的迭代器，最简单的是从头到尾遍历一次。`Iterator.initializer`可以重新初始化迭代器，用于遍历不同的数据集。
 
+## 基本机制
+
+首先把`Dataset`给搞出来，不管是直接从`Tensor`还是从`TFRecord`之类的文件格式。
+
+然后就可以对`Dataset`做72变，可以用`Dataset.map()`之类对单个元素操作的方法，也可以用`Dataset.batch()`之类的多元素操作方法。
+
+最后再用各种`Iterator`来遍历。
+
+## Dataset的数据结构
+
+`dataset -> element -> tf.Tensor`
+
+- 每个 element 的结构都是一样的，有一个或多个`Tensor`对象，也称为component
+- `tf.DType`表示张量里的变量类型，`tf.TensorShape`表示元素的形状
